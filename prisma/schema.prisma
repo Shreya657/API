@@ -15,8 +15,10 @@ datasource db {
 
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id
   email     String   @unique
+  username  String?  @unique //  this during onboarding
+  name      String?  //  from clerk initially
   apiKeys   ApiKey[]
   createdAt DateTime @default(now())
 }
