@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  apiKeys   ApiKey[]
+  createdAt DateTime @default(now())
+}
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  keyHash   String   @unique  // SHA-256 hash of the key
+  name      String   @default("Default Key")
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Tier management
+  limit     Int      @default(100) // Max requests per day
+  
+  // Metadata for the dashboard
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  lastUsed  DateTime?
+  logs      UsageLog[] // One key can have many logs
+
+  @@index([keyHash]) // Fast lookup for authentication
+}
+
+
+
+model UsageLog {
+  id        String   @id @default(cuid())
+  apiKeyId  String
+  apiKey    ApiKey   @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+  endpoint  String
+  status    Int      // 200, 429, etc.
+  timestamp DateTime @default(now())
+}
+
+// Optional: If you want to cache the metadata results in the DB 
+// (though Redis is better for speed, this is good for persistence)
+model MetadataCache {
+  id          String   @id @default(cuid())
+  url         String   @unique
+  title       String?
+  description String?
+  image       String?
+  favicon     String?
+  siteName    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([url])
+}
