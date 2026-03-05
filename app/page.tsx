@@ -27,9 +27,11 @@ export default function Home() {
               Start Building Free
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="h-12 px-8 text-lg border-white/10 hover:bg-white/5 text-black hover:bg-gray-200">
-            Documentation
-          </Button>
+          <Link href="/docs">
+            <Button size="lg" variant="outline" className="h-12 px-8 text-lg border-white/10 hover:bg-white/5 text-black hover:bg-gray-200">
+              Documentation
+            </Button>
+          </Link>
         </div>
       </main>
     </div>
