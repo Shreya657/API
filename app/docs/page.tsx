@@ -141,18 +141,42 @@ echo $response;
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start pt-8 border-t border-zinc-800">
           <div className="space-y-4">
             <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-widest">JSON Response</h3>
-            <div className="relative group w-112 ">
-               <CopyButton code={JSON.stringify({ title: "GitHub...", description: "The world's leading..." }, null, 2)} />
-               <pre className="p-6 bg-zinc-950 border border-zinc-800 rounded-xl text-emerald-400 text-xs font-mono">
-                {JSON.stringify({
-                  title: "GitHub: Let's build from here",
-                  description: "The world's leading developer platform.",
-                  image: "https://github.com/og-image.png",
-                  favicon: "https://github.com/favicon.ico",
-                  siteName: "GitHub"
-                }, null, 2)}
-              </pre>
-            </div>
+           <div className="relative group w-full max-w-lg"> 
+  <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+    <CopyButton 
+      code={JSON.stringify({
+        title: "GitHub: Let's build from here",
+        description: "The world's leading developer platform.",
+        url: "https://github.com/home", 
+        siteName: "GitHub",
+        image: "https://github.com/og-image.png",
+        favicon: "https://www.google.com/s2/favicons?domain=github.com",
+        metadata: {
+          readingTime: "4 min read",
+          wordCount: 842
+        }
+      }, null, 2)} 
+    />
+  </div>
+
+  <pre className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl text-emerald-400 text-xs font-mono overflow-x-auto whitespace-pre-wrap break-words">
+    {JSON.stringify(
+      {
+        title: "GitHub: Let's build from here",
+        description: "The world's leading developer platform.",
+        url: "https://github.com/home", 
+        siteName: "GitHub",
+        image: "https://github.com/og-image.png",
+        favicon: "https://www.google.com/s2/favicons?domain=github.com",
+        metadata: {
+          readingTime: "4 min read",
+          wordCount: 842
+        }
+      }, 
+      null, 2
+    )}
+  </pre>
+</div>
           </div>
 
 
