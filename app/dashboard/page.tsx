@@ -46,6 +46,11 @@ const recentLogs = await prisma.usageLog.findMany({
           </Link>
         <div className="flex justify-between items-center border-b border-zinc-800 pb-8">
           <div>
+            <div className="flex items-center gap-2 mb-1">
+      <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+       Welcome back, @{user.username}
+      </span>
+    </div>
             <h1 className="text-4xl font-extrabold tracking-tight">Dashboard</h1>
             <p className="text-zinc-400 mt-2">Manage your LinkAura API access and keys.</p>
           </div>
