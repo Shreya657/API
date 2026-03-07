@@ -11,7 +11,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/50 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="text-xl font-bold tracking-tighter text-white">
-          Link<span className="text-blue-500">Aura</span>
+          scrap<span className="text-blue-500"> It</span>
         </Link>
         
         <div className="flex items-center gap-4">

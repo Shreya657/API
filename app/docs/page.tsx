@@ -13,7 +13,7 @@ export default function DocsPage() {
      `const fetchMetadata = async (targetUrl) => {
   const response = await fetch("${endpoint}?url=\${targetUrl}", {
     headers: {
-      "x-api-key": "la_..." // REPLACE WITH YOUR API KEY FROM DASHBOARD
+      "x-api-key": "la_..." // REPLACE WITH YOUR API KEY HERE
     }
   });
   return await response.json();
@@ -93,7 +93,7 @@ echo $response;
         <section className="space-y-4">
           <h1 className="text-4xl font-bold text-white tracking-tight">API Documentation</h1>
           <p className="text-lg text-zinc-400">
-            Learn how to integrate LinkAura's metadata extraction into your own applications.
+            Learn how to integrate metadata extraction into your own applications.
           </p>
         </section>
 

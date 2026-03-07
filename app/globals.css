@@ -45,6 +45,38 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
+
+
+@utility animate-orbit-1 {
+  animation: spin-slow 3s linear infinite;
+}
+
+@utility animate-orbit-2 {
+  animation: spin-slow 4s linear infinite reverse;
+}
+
+@utility animate-orbit-3 {
+  animation: spin-slow 5s linear infinite;
+}
+
+@utility electron-1-pos {
+  transform: translate(10px, 48px);
+}
+
+@utility electron-2-pos {
+  transform: translate(80px, 15px);
+}
+
+@utility electron-3-pos {
+  transform: translate(45px, 90px);
+
 }
 
 :root {
@@ -124,3 +156,6 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+
