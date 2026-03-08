@@ -5,7 +5,7 @@ import CopyButton from "./copyButton";
 import Link from "next/link";
 
 export default function DocsPage() {
-  const endpoint = "http://localhost:3000/actions/extract"; //will replace later
+  const endpoint = "https://api-ten-sepia-10.vercel.app/actions/extract"; //will replace later
 
   // snippets objects
   const snippets = {
@@ -197,7 +197,7 @@ echo $response;
                 <div className="p-4 space-y-2">
                   <div className="flex items-center gap-2 text-[10px] text-blue-400 font-bold uppercase tracking-widest">
                     <Zap className="h-3 w-3" />
-                    linkaura.com/extract
+                    scrapIt.com/extract
                   </div>
                   <h4 className="text-white font-bold text-lg line-clamp-1">GitHub: Let's build from here</h4>
                   <p className="text-zinc-400 text-sm line-clamp-2 leading-relaxed">The world's leading developer platform. Millions of developers and companies build, ship, and maintain their software on GitHub.</p>
