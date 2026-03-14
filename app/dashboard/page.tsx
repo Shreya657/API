@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { Trash2, Key, Calendar,  Activity, Zap, ArrowLeft, Terminal } from "lucide-react";
+import { Trash2, Key, Calendar,  Activity, Zap, ArrowLeft, Terminal, Edit2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/utils/prisma";
 import KeyManager from "../components/keyManager";
@@ -73,11 +73,17 @@ const chartData = Array.from({ length: 7 }).map((_, i) => {
             <Link href="/" className="text-sm text-zinc-500 flex items-center hover:text-blue-400 transition-colors">
               <ArrowLeft className="h-4 w-4 mr-1" /> back
             </Link>
-            <div className="flex items-center gap-2">
-               <span className="text-[10px] uppercase tracking-widest font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                Member: {user.username}
-               </span>
-            </div>
+           <div className="flex items-center gap-2 group">
+  <span className="text-[10px] uppercase tracking-widest font-bold px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">
+    Member: {user.username}
+  </span>
+  <Link 
+    href={`/onboarding?edit=true&current=${user.username}`} 
+    className="opacity-0 group-hover:opacity-100 transition-opacity text-zinc-500 hover:text-blue-400"
+  >
+    <Edit2 className="h-3 w-3" />
+  </Link>
+</div>
             <h1 className="text-4xl font-extrabold tracking-tight">Console</h1>
           </div>
           <div className="flex gap-3">

@@ -15,8 +15,9 @@ export async function completeOnboarding(username: string) {
   const existing = await prisma.user.findUnique({
     where: { username }
   });
-
-  if (existing) {
+  
+ // if someone else owns it and its not that user, throw errror
+  if (existing && existing.id !== userId) {
     throw new Error("Username already taken. Try another one!");
   }
 
@@ -35,3 +36,5 @@ export async function completeOnboarding(username: string) {
   // 3. Send them to the main content
   redirect("/dashboard");
 }
+
+
