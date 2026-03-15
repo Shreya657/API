@@ -10,7 +10,7 @@ export default function TestFetch() {
   const testApi = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:3000/actions/extract", {
+      const { data } = await axios.get("https://api-ten-sepia-10.vercel.app/actions/extract", {
         params: { url: "https://github.com" },
         headers: { 
           "x-api-key": "la_5b45d5798fe8a86e436a8b275d1fb8b7645731e76cc6c6d9" // Put your key here
