@@ -3,12 +3,30 @@ import { ratelimit, redis } from '@/app/lib/redis';
 import { scrapeUrl } from '@/app/lib/scraper';
 import { prisma } from '@/utils/prisma';
 import { NextRequest, NextResponse } from 'next/server';
+// defining global CORS headers
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, x-api-key",
+};
 
+//  add an OPTIONS handler for preflight checks
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders });
+}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const targetUrl = searchParams.get('url');
   const apiKey = req.headers.get('x-api-key');
+
+  // function to return json with CORS
+  const jsonResponse = (data: any, status = 200, extraHeaders = {}) => {
+    return NextResponse.json(data, { 
+      status, 
+      headers: { ...corsHeaders, ...extraHeaders } 
+    });
+  };
 
   // validation
   if (!targetUrl) 
@@ -77,9 +95,7 @@ export async function GET(req: NextRequest) {
       // redis might return it as a string or object depending on how it's stored
       const data = typeof cachedData === "string" ? JSON.parse(cachedData) : cachedData;
       
-      return NextResponse.json(data, {
-        headers: { "X-Cache": "HIT" }
-      });
+    return jsonResponse(data, 200, { "X-Cache": "HIT" });
     }
 
 
@@ -101,10 +117,9 @@ export async function GET(req: NextRequest) {
       }
     });
 
-    return NextResponse.json(metadata, {
-      headers: { "X-Cache": "MISS" }
-    });
+   return jsonResponse(metadata, 200, { "X-Cache": "MISS" });
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Scrape Error:", error);
+    return jsonResponse({ error: error.message }, 500);
   }
 }
